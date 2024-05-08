@@ -1,0 +1,50 @@
+from math import pow
+
+def crear_combinaciones(caracteres, longitud):
+    """
+    Crea una lista con todas las combinaciones posibles de los caracteres dados
+    con la longitud especificada.
+
+    Args:
+        caracteres (str): Cadena con los caracteres del alfabeto.
+        longitud (int): Longitud deseada de las combinaciones.
+
+    Returns:
+        list: Lista con todas las combinaciones posibles.
+    """
+    combinaciones = []
+    if longitud == 1:
+        return list(caracteres)
+
+    for c in caracteres:
+        for combo in crear_combinaciones(caracteres, longitud - 1):
+            combinaciones.append(c + combo)
+
+    return combinaciones
+
+def contar_combinaciones(caracteres, longitud):
+    """
+    Calcula el número total de combinaciones posibles de los caracteres dados
+    con la longitud especificada.
+
+    Args:
+        caracteres (str): Cadena con los caracteres del alfabeto.
+        longitud (int): Longitud deseada de las combinaciones.
+
+    Returns:
+        int: Número total de combinaciones posibles.
+    """
+    return pow(len(caracteres), longitud)
+
+def main():
+    alfabeto = input("Ingrese los caracteres del alfabeto: ")
+    longitud = int(input("Ingrese la longitud deseada de las combinaciones: "))
+
+    combinaciones = crear_combinaciones(alfabeto, longitud)
+    total = contar_combinaciones(alfabeto, longitud)
+
+    print(f"Las combinaciones posibles son: {', '.join(combinaciones)}")
+    print(f"El número total de combinaciones es: {total}")
+
+if __name__ == "__main__":
+    main()
